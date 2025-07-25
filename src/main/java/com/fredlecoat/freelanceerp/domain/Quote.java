@@ -10,6 +10,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 @Data
@@ -44,4 +45,10 @@ public class Quote {
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private Customer customer;
+
+    @OneToMany(mappedBy = "quote")
+    private Set<Contract> contracts;
+
+    @OneToMany(mappedBy = "quote")
+    private Set<Service> services;
 }
