@@ -54,4 +54,7 @@ public class Customer {
 
     @OneToMany(mappedBy = "customer")
     private Set<CommunicationMethod> communicationMethod;
+
+    @OneToMany(mappedBy = "customer")
+    private Set<Quote> quotes;
 }
