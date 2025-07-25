@@ -1,7 +1,7 @@
-package com.fredlecoat.freelanceerp.domain;
+package com.fredlecoat.freelanceerp.domain.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fredlecoat.freelanceerp.domain.values.TaskStatus;
+import com.fredlecoat.freelanceerp.domain.values.InvoiceStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,33 +15,30 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Task {
+public class Invoice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
-    private String title;
+    private String invoiceNumber;
 
     @Column(nullable = false)
-    private String description;
+    private LocalDate invoiceDate;
 
     @Column(nullable = false)
     private LocalDate dueDate;
 
     @Column(nullable = false)
-    private LocalDate startDate;
-
-    @Column(nullable = true)
-    private LocalDate endDate;
+    private double amount;
 
     @Column(nullable = false)
-    @Enumerated(value = EnumType.STRING)
-    private TaskStatus status;
+    @Enumerated(EnumType.STRING)
+    private InvoiceStatus status;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "project_id")
+    @JoinColumn(name = "contract_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
-    private Project project;
+    private Contract contract;
 }

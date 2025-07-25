@@ -1,7 +1,7 @@
-package com.fredlecoat.freelanceerp.domain;
+package com.fredlecoat.freelanceerp.domain.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fredlecoat.freelanceerp.domain.values.QuoteStatus;
+import com.fredlecoat.freelanceerp.domain.values.TaskStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,46 +9,39 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-import java.time.LocalDateTime;
-import java.util.Set;
+import java.time.LocalDate;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Quote {
+public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
-    private String reference;
+    private String title;
 
     @Column(nullable = false)
-    private LocalDateTime creationDate;
+    private String description;
 
     @Column(nullable = false)
-    private LocalDateTime validUntil;
+    private LocalDate dueDate;
 
     @Column(nullable = false)
-    private String subject;
+    private LocalDate startDate;
+
+    @Column(nullable = true)
+    private LocalDate endDate;
 
     @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private QuoteStatus status;
-
-    @Column(nullable = false)
-    private double price;
+    @Enumerated(value = EnumType.STRING)
+    private TaskStatus status;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "customer_id")
+    @JoinColumn(name = "project_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
-    private Customer customer;
-
-    @OneToMany(mappedBy = "quote")
-    private Set<Contract> contracts;
-
-    @OneToMany(mappedBy = "quote")
-    private Set<Service> services;
+    private Project project;
 }

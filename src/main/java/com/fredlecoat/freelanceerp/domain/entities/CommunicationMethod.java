@@ -1,9 +1,8 @@
-package com.fredlecoat.freelanceerp.domain;
+package com.fredlecoat.freelanceerp.domain.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fredlecoat.freelanceerp.domain.values.CommunicationMethodPlatform;
 import com.fredlecoat.freelanceerp.domain.values.CommunicationMethodType;
-import com.fredlecoat.freelanceerp.domain.values.CustomerStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
