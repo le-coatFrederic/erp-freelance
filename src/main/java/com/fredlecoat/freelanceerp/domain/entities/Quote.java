@@ -37,18 +37,15 @@ public class Quote {
     @Enumerated(EnumType.STRING)
     private QuoteStatus status;
 
-    @Column(nullable = false)
-    private double price;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "customer_id")
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JsonIgnore
-    private Customer customer;
+    @JoinColumn(name = "quest_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Quest quest;
 
     @OneToMany(mappedBy = "quote")
-    private Set<Contract> contracts;
+    private Set<Invoice> invoices;
 
     @OneToMany(mappedBy = "quote")
-    private Set<Service> services;
+    private Set<QuoteLine> quoteLines;
 }

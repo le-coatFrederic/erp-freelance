@@ -53,11 +53,8 @@ public class Customer {
     private CustomerContactGap contactSituation;
 
     @OneToMany(mappedBy = "customer")
-    private Set<CommunicationMethod> communicationMethod;
-
-    @OneToMany(mappedBy = "customer")
     private Set<Contact> contacts;
 
     @OneToMany(mappedBy = "customer")
-    private Set<Quote> quotes;
+    private Set<Quest> quests;
 }
