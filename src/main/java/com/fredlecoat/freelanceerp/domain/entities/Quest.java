@@ -1,6 +1,7 @@
 package com.fredlecoat.freelanceerp.domain.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fredlecoat.freelanceerp.domain.values.QuestStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,36 +9,35 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-import java.util.Locale;
+import java.time.LocalDate;
 import java.util.Set;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Contract {
+public class Quest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String contractNumber;
+    private String title;
 
-    @Column(nullable = false)
-    private Locale startDate;
+    private String description;
 
-    @Column(nullable = false)
-    private Locale endDate;
+    private LocalDate startDate;
 
-    @Column(nullable = false)
-    private String terms;
+    private LocalDate endDate;
 
-    @OneToMany(mappedBy = "contract")
-    private Set<Project> projects;
+    @Enumerated(EnumType.STRING)
+    private QuestStatus status;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "quote_id")
+    @JoinColumn(name = "customer_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
-    private Quote quote;
+    private Customer customer;
+
+    @OneToMany(mappedBy = "quest")
+    private Set<Quote> quotes;
 }

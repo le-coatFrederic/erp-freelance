@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import java.util.Set;
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -34,9 +36,9 @@ public class Service {
     @Column(nullable = false)
     private String unit;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "quote_id")
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
-    private Quote quote;
+    @OneToMany(mappedBy = "service")
+    private Set<QuoteLine> quoteLines;
+
+    @OneToMany(mappedBy = "service")
+    private Set<InvoiceLine> invoiceLines;
 }

@@ -10,6 +10,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
 @Data
@@ -30,15 +31,15 @@ public class Invoice {
     private LocalDate dueDate;
 
     @Column(nullable = false)
-    private double amount;
-
-    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private InvoiceStatus status;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "contract_id")
+    @JoinColumn(name = "quote_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
-    private Contract contract;
+    private Quote quote;
+
+    @OneToMany(mappedBy = "invoice")
+    private Set<InvoiceLine> invoiceLines;
 }
