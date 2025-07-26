@@ -46,4 +46,14 @@ public class Contact {
 
     @OneToMany(mappedBy = "contact")
     private Set<Message> messages;
+
+    public Contact(String firstName, String lastName, String email, String phone, String linkedin, String jobTitle, Customer customer) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phone = phone;
+        this.linkedin = linkedin;
+        this.jobTitle = jobTitle;
+        this.customer = customer;
+    }
 }

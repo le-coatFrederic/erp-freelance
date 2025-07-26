@@ -38,10 +38,4 @@ public class Project {
 
     @OneToMany(mappedBy = "project")
     private Set<Task> tasks;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "contract_id")
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
-    private Contract contract;
 }

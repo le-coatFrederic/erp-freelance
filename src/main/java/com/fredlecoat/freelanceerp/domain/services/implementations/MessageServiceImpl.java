@@ -63,7 +63,7 @@ public class MessageServiceImpl implements MessageService {
     public List<Message> findByMessageTemplate(MessageTemplate messageTemplate) {
         List<Message> messages = new ArrayList<>();
         this.messageRepository.findAll().forEach(message -> {
-            if (messageTemplate.getId().equals(message.getMessageTemplate().getId())) {
+            if (messageTemplate.getId().equals(message.getTemplate().getId())) {
                 messages.add(message);
             }
         });
