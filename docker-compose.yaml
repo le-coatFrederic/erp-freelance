@@ -1,0 +1,24 @@
+services:
+  database:
+    env_file:
+      - .env
+    image: postgres:latest
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: freelance-erp
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    volumes:
+      - ./db:/var/lib/postgresql/data/
+
+  pgadmin:
+    image: dpage/pgadmin4
+    ports:
+      - 8080:80
+    env_file:
+      - .env
+    depends_on:
+      - database
+    volumes:
+      - ./db/pgadmin-data/:/var/lib/pgadmin/

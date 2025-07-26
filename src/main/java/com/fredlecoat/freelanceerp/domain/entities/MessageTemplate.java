@@ -24,4 +24,9 @@ public class MessageTemplate {
 
     @OneToMany(mappedBy = "template")
     private Set<Message> messages;
+
+    public MessageTemplate(String subject, String body) {
+        this.subject = subject;
+        this.body = body;
+    }
 }

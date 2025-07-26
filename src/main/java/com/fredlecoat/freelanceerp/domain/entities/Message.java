@@ -40,5 +40,13 @@ public class Message {
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "message_template_id")
     @JsonIgnore
-    private MessageTemplate messageTemplate;
+    private MessageTemplate template;
+
+    public Message(MessageStatus status, LocalDate plannedDate, LocalDate sendDate, Contact contact, MessageTemplate template) {
+        this.status = status;
+        this.plannedDate = plannedDate;
+        this.sendDate = sendDate;
+        this.contact = contact;
+        this.template = template;
+    }
 }

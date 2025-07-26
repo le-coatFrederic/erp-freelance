@@ -57,4 +57,28 @@ public class Customer {
 
     @OneToMany(mappedBy = "customer")
     private Set<Quest> quests;
+
+    public Customer(
+            String name,
+            String socialReason,
+            String SIRET,
+            String address,
+            String mail,
+            String phone,
+            String website,
+            CustomerType type,
+            CustomerStatus status,
+            CustomerContactGap contactSituation
+    ) {
+        this.name = name;
+        this.socialReason = socialReason;
+        this.SIRET = SIRET;
+        this.address = address;
+        this.mail = mail;
+        this.phone = phone;
+        this.website = website;
+        this.type = type;
+        this.status = status;
+        this.contactSituation = contactSituation;
+    }
 }
