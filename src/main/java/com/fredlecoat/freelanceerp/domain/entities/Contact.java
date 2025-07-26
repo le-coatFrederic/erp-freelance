@@ -1,9 +1,6 @@
-package com.fredlecoat.freelanceerp.domain;
+package com.fredlecoat.freelanceerp.domain.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fredlecoat.freelanceerp.domain.values.CommunicationMethodPlatform;
-import com.fredlecoat.freelanceerp.domain.values.CommunicationMethodType;
-import com.fredlecoat.freelanceerp.domain.values.CustomerStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,33 +8,42 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CommunicationMethod {
+public class Contact {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
-    @Enumerated(value = EnumType.STRING)
-    private CommunicationMethodType type;
+    private String firstName;
 
     @Column(nullable = false)
-    @Enumerated(value = EnumType.STRING)
-    private CommunicationMethodPlatform platform;
+    private String lastName;
 
     @Column(nullable = true)
-    private String comment;
+    private String email;
 
-    private LocalDateTime createdAt;
+    @Column(nullable = true)
+    private String phone;
+
+    @Column(nullable = true)
+    private String linkedin;
+
+    @Column(nullable = true)
+    private String jobTitle;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "customer_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
+    @JoinColumn(name = "customer_id")
     private Customer customer;
+
+    @OneToMany(mappedBy = "contact")
+    private Set<Message> messages;
 }

@@ -1,4 +1,4 @@
-package com.fredlecoat.freelanceerp.domain;
+package com.fredlecoat.freelanceerp.domain.entities;
 
 import com.fredlecoat.freelanceerp.domain.values.CustomerContactGap;
 import com.fredlecoat.freelanceerp.domain.values.CustomerStatus;
@@ -54,4 +54,10 @@ public class Customer {
 
     @OneToMany(mappedBy = "customer")
     private Set<CommunicationMethod> communicationMethod;
+
+    @OneToMany(mappedBy = "customer")
+    private Set<Contact> contacts;
+
+    @OneToMany(mappedBy = "customer")
+    private Set<Quote> quotes;
 }
