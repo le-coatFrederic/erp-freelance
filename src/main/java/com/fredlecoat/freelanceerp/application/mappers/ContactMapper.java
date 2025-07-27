@@ -23,7 +23,7 @@ public class ContactMapper {
     }
 
     public Contact toEntity(ContactCreateDTO contactDTO) {
-        Customer customer = this.customerService.findById(contactDTO.customer().id());
+        Customer customer = this.customerService.findById(contactDTO.customerId());
 
         return new Contact(
                 contactDTO.firstname(),

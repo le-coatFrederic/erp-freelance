@@ -7,6 +7,6 @@ public record ContactCreateDTO(
         String phone,
         String linkedin,
         String jobTitle,
-        CustomerShowAllDTO customer
+        Long customerId
 ) {
 }

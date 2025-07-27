@@ -22,10 +22,6 @@ public class CustomerServiceImpl implements CustomerService {
             throw new IllegalArgumentException("Customer cannot be null");
         }
 
-        if (customerRepository.existsById(customer.getId())) {
-            throw new IllegalArgumentException("Customer with id " + customer.getId() + " already exists");
-        }
-
         return customerRepository.save(customer);
     }
 

@@ -12,8 +12,8 @@ import com.fredlecoat.freelanceerp.domain.services.MessageTemplateService;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MessageMapper {
-    private final MessageService messageService;
+    public class MessageMapper {
+        private final MessageService messageService;
     private final ContactService contactService;
     private final MessageTemplateService messageTemplateService;
     private final ContactMapper contactMapper;

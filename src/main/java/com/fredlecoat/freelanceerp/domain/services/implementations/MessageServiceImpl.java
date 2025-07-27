@@ -24,10 +24,6 @@ public class MessageServiceImpl implements MessageService {
             throw new IllegalArgumentException("Message cannot be null");
         }
 
-        if (this.messageRepository.existsById(message.getId())) {
-            throw new IllegalArgumentException("Message with id " + message.getId() + " already exist");
-        }
-
         return this.messageRepository.save(message);
     }
 

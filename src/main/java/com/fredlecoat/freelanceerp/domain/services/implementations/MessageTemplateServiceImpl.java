@@ -31,10 +31,6 @@ public class MessageTemplateServiceImpl implements MessageTemplateService {
             throw new IllegalArgumentException("Message template cannot be null");
         }
 
-        if (this.messageTemplateRepository.existsById(messageTemplate.getId())) {
-            throw new IllegalArgumentException("Message template with id " + messageTemplate.getId() + " already exists");
-        }
-
         return this.messageTemplateRepository.save(messageTemplate);
     }
 
