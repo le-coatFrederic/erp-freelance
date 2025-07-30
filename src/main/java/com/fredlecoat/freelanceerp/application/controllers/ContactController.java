@@ -25,8 +25,10 @@ public class ContactController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ContactShowAllDTO>> index() {
-        List<Contact> contacts = this.contactService.findAll();
+    public ResponseEntity<List<ContactShowAllDTO>> index(@RequestParam(required = false, name = "customer") Long customerId) {
+        List<Contact> contacts = customerId == null ?
+                this.contactService.findAll() :
+                this.contactService.findByCustomer(customerId);
         List<ContactShowAllDTO> contactDTOs = contacts.stream()
                 .map(contactMapper::toDTO)
                 .collect(Collectors.toList());

@@ -27,7 +27,7 @@ public class Message {
     @Column(nullable = false)
     private LocalDate plannedDate;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private LocalDate sendDate;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

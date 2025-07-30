@@ -21,8 +21,10 @@ public class Quest {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String title;
 
+    @Column(nullable = false)
     private String description;
 
     private LocalDate startDate;
@@ -40,4 +42,13 @@ public class Quest {
 
     @OneToMany(mappedBy = "quest")
     private Set<Quote> quotes;
+
+    public Quest(String title, String description, LocalDate startDate, LocalDate endDate, QuestStatus status, Customer customer) {
+        this.title = title;
+        this.description = description;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.status = status;
+        this.customer = customer;
+    }
 }

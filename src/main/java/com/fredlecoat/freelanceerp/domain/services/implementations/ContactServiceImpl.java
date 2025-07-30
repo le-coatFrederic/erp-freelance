@@ -1,6 +1,7 @@
 package com.fredlecoat.freelanceerp.domain.services.implementations;
 
 import com.fredlecoat.freelanceerp.domain.entities.Contact;
+import com.fredlecoat.freelanceerp.domain.entities.Customer;
 import com.fredlecoat.freelanceerp.domain.repositories.ContactRepository;
 import com.fredlecoat.freelanceerp.domain.services.ContactService;
 import org.springframework.stereotype.Service;
@@ -51,6 +52,11 @@ public class ContactServiceImpl implements ContactService {
     @Override
     public Contact findById(Long id) {
         return this.contactRepository.findById(id).orElseThrow();
+    }
+
+    @Override
+    public List<Contact> findByCustomer(Long customerId) {
+        return this.contactRepository.findAllByCustomer_Id(customerId);
     }
 
     @Override
