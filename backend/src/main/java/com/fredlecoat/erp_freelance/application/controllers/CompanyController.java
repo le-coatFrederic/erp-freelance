@@ -30,11 +30,34 @@ public class CompanyController {
         );
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<CompanyTotalResponse> getCompany(@PathVariable Long id) {
+        CompanyTotalResponse dto = this.companyMapper.toDto(this.companyService.getById(id));
+        return ResponseEntity.ok(dto);
+    }
+
     @PostMapping
     public ResponseEntity<CompanyTotalResponse> createCompany(@RequestBody CompanyWithoutIdRequest request) {
         CompanyEntity entity = this.companyService.create(this.companyMapper.toEntity(request));
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(this.companyMapper.toDto(entity));
+        return ResponseEntity.status(HttpStatus.CREATED).body(this.companyMapper.toDto(entity));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<CompanyTotalResponse> update(
+            @PathVariable Long id,
+            @RequestBody CompanyWithoutIdRequest dto) {
+
+        CompanyTotalResponse updated = this.companyMapper.toDto(
+                this.companyService.update(this.companyMapper.toEntity(dto), id)
+        );
+        return ResponseEntity.status(HttpStatus.OK).body(updated);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(
+            @PathVariable Long id
+    ) {
+        this.companyService.delete(id);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 }
