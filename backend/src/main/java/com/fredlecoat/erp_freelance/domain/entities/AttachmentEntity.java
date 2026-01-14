@@ -1,6 +1,8 @@
 package com.fredlecoat.erp_freelance.domain.entities;
 
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.fredlecoat.erp_freelance.domain.entities.values.AttachmentType;
 
@@ -9,6 +11,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
@@ -35,6 +38,9 @@ public class AttachmentEntity {
 
     @Column(nullable = false)
     private AttachmentType type;
+
+    @ManyToMany(mappedBy = "attachments")
+    private Set<MessageTemplateEntity> messageTemplates = new HashSet<>();
 
     @Column(nullable = false)
     private Instant createdOn;

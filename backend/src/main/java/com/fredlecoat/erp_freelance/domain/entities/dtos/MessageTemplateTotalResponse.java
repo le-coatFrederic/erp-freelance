@@ -1,5 +1,7 @@
 package com.fredlecoat.erp_freelance.domain.entities.dtos;
 
+import java.util.List;
+
 import com.fredlecoat.erp_freelance.domain.entities.values.MessageTemplateType;
 
 public record MessageTemplateTotalResponse(
@@ -7,7 +9,8 @@ public record MessageTemplateTotalResponse(
     String subject,
     String description,
     MessageTemplateType type,
-    String content
+    String content,
+    List<AttachmentTotalResponse> attachments
 ) {
 
 }

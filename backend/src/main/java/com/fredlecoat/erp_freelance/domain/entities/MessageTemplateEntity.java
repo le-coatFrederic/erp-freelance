@@ -1,6 +1,8 @@
 package com.fredlecoat.erp_freelance.domain.entities;
 
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.fredlecoat.erp_freelance.domain.entities.values.MessageTemplateType;
 
@@ -11,6 +13,9 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
@@ -42,6 +47,14 @@ public class MessageTemplateEntity {
     @Column(nullable = false)
     private String content;
 
+    @ManyToMany
+    @JoinTable(
+        name = "attachments_message_templates",
+        joinColumns = @JoinColumn(name = "message_template_id"),
+        inverseJoinColumns = @JoinColumn(name = "attachment_id")
+    )
+    private Set<AttachmentEntity> attachments = new HashSet<>();
+
     @Column(nullable = false)
     private Instant createdOn;
 
@@ -52,12 +65,14 @@ public class MessageTemplateEntity {
         String subject,
         String description,
         MessageTemplateType type,
-        String content
+        String content,
+        Set<AttachmentEntity> attachments
     ) {
         this.subject = subject;
         this.description = description;
         this.type = type;
         this.content = content;
+        this.attachments = attachments;
     }
 
     @PrePersist
