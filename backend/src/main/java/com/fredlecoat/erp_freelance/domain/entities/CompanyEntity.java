@@ -1,5 +1,7 @@
 package com.fredlecoat.erp_freelance.domain.entities;
 
+import java.util.Set;
+
 import com.fredlecoat.erp_freelance.domain.entities.values.CompanyCategory;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -24,6 +26,9 @@ public class CompanyEntity {
     private CompanyCategory category;
 
     private int size;
+
+    @OneToMany(mappedBy = "company")
+    private Set<ContactEntity> contacts;
 
     public CompanyEntity(String name, String siret, CompanyCategory category, int size) {
         this.name = name;
