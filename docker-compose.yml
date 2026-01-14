@@ -1,5 +1,14 @@
 services:
-  app:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: erp-freelance-frontend
+    restart: unless-stopped
+    ports:
+      - "8081:80"
+
+  backend:
     build:
       context: ./backend
       dockerfile: Dockerfile
