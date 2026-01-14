@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { ContactService } from '../../services/contact-service';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-contacts-list',
@@ -7,5 +9,7 @@ import { Component } from '@angular/core';
   styleUrl: './contacts-list.scss',
 })
 export class ContactsList {
+    private contactService = inject(ContactService);
+    contacts = toSignal(this.contactService.getContacts(), { initialValue: [] });
 
 }

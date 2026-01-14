@@ -7,3 +7,8 @@ export interface Company {
     category: CompanyType
     size: number
 };
+
+export interface CompanyLight {
+    id: number,
+    name: string,
+}

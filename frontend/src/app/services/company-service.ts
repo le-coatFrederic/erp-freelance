@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { Company } from '../models/company';
+import { Company, CompanyLight } from '../models/company';
 import { CompanyType } from '../models/values/company-type';
 import { ApiService } from './api-service';
 import { Observable } from 'rxjs';
@@ -9,12 +9,17 @@ import { Observable } from 'rxjs';
 })
 export class CompanyService {
   private api = inject(ApiService);
+  private url = 'companies';
 
   getCompanies(): Observable<Company[]> {
-    return this.api.get<Company[]>('companies');
+    return this.api.get<Company[]>(this.url);
+  }
+
+  getLightCompanies(): Observable<CompanyLight[]> {
+    return this.api.get<CompanyLight[]>(this.url + '/light');
   }
 
   createCompany(body: Company) {
-    return this.api.post<Company>('companies', body);
+    return this.api.post<Company>(this.url, body);
   }
 }
