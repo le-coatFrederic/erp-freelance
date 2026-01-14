@@ -21,9 +21,9 @@ public class ContactEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String firstName;
+    private String firstname;
 
-    private String lastName;
+    private String lastname;
 
     private String job;
 
@@ -40,16 +40,16 @@ public class ContactEntity {
     private CompanyEntity company;
 
     public ContactEntity(
-        String firstName, 
-        String lastName, 
+        String firstname, 
+        String lastname, 
         String job,
         String email, 
         String phone,
         String linkedin, 
         CompanyEntity company
     ) {
-        this.lastName = lastName;
-        this.firstName = firstName;
+        this.lastname = lastname;
+        this.firstname = firstname;
         this.job = job;
         this.email = email;
         this.linkedin = linkedin;

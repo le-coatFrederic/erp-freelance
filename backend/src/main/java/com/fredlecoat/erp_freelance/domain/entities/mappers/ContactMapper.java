@@ -37,8 +37,8 @@ public class ContactMapper {
     public ContactTotalResponse toDto(ContactEntity entity) {
         return new ContactTotalResponse(
             entity.getId(),
-            entity.getFirstName(),
-            entity.getLastName(),
+            entity.getFirstname(),
+            entity.getLastname(),
             entity.getJob(),
             entity.getEmail(),
             entity.getLinkedin(),
