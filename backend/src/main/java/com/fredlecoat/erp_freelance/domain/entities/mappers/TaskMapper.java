@@ -8,6 +8,7 @@ import com.fredlecoat.erp_freelance.domain.entities.dtos.TaskTotalResponse;
 import com.fredlecoat.erp_freelance.domain.entities.dtos.TaskWithoutIdRequest;
 import com.fredlecoat.erp_freelance.domain.services.ContactService;
 import com.fredlecoat.erp_freelance.domain.services.MessageTemplateService;
+import com.fredlecoat.erp_freelance.domain.services.TaskStackService;
 
 @Component
 public class TaskMapper {
@@ -19,15 +20,22 @@ public class TaskMapper {
     private ContactService contactService;
 
     @Autowired
+    private TaskStackService taskStackService;
+
+    @Autowired
     private ContactMapper contactMapper;
 
     @Autowired
     private MessageTemplateMapper messageTemplateMapper;
 
+    @Autowired
+    private TaskStackMapper taskStackMapper;
+
     public TaskEntity toEntity(TaskWithoutIdRequest dto) {
         return new TaskEntity(
             messageTemplateService.getById(dto.message_template_id()),
             contactService.getById(dto.contact_id()),
+            taskStackService.getById(dto.task_stack_id()),
             dto.name(),
             dto.description(),
             dto.category()
@@ -41,7 +49,8 @@ public class TaskMapper {
             entity.getDescription(),
             entity.getCategory(),
             messageTemplateMapper.toDto(entity.getMessageTemplate()),
-            contactMapper.toDto(entity.getContact())
+            contactMapper.toDto(entity.getContact()),
+            taskStackMapper.toDto(entity.getTaskStack())
         );
     }
 }

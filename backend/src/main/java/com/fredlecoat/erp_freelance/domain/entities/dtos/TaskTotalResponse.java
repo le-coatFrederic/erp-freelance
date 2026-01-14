@@ -7,6 +7,7 @@ public record TaskTotalResponse(
     String name,
     String description,
     TaskCategory category,
-    MessageTemplateTotalResponse messageTemplate,
-    ContactTotalResponse contact
+    MessageTemplateTotalResponse message_template,
+    ContactTotalResponse contact,
+    TaskStackTotalResponse task_stack
 ) {}

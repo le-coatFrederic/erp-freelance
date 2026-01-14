@@ -40,6 +40,10 @@ public class TaskEntity {
     @JoinColumn(name = "contact_id")
     private ContactEntity contact;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "task_stack_id")
+    private TaskStackEntity taskStack;
+
     @Column(nullable = false)
     private String name;
 
@@ -59,12 +63,14 @@ public class TaskEntity {
     public TaskEntity(
         MessageTemplateEntity messageTemplate,
         ContactEntity contact,
+        TaskStackEntity taskStack,
         String name,
         String description,
         TaskCategory category
     ) {
         this.messageTemplate = messageTemplate;
         this.contact = contact;
+        this.taskStack = taskStack;
         this.name = name;
         this.description = description;
         this.category = category;
