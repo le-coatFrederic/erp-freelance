@@ -10,7 +10,7 @@ services:
     networks:
       - erp-freelance-network:
     depends_on:
-      backend:
+      - backend:
 
   backend:
     build:
