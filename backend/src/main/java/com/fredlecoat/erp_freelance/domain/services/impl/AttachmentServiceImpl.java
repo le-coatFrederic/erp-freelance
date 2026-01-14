@@ -29,7 +29,7 @@ public class AttachmentServiceImpl implements AttachmentService {
     @Override
     public AttachmentEntity update(AttachmentEntity entity, Long id) {
         Optional<AttachmentEntity> foundEntity = Optional.of(this.attachmentRepository.findById(id).orElseThrow());
-        entity.setId(foundEntity.get().getId());
+        entity.updateWithOldData(foundEntity.get());
         return this.attachmentRepository.save(entity);
     }
 

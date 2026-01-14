@@ -29,7 +29,7 @@ public class ContactServiceImpl implements ContactService {
     @Override
     public ContactEntity update(ContactEntity entity, Long id) {
         Optional<ContactEntity> foundEntity = Optional.of(this.contactRepository.findById(id).orElseThrow());
-        entity.setId(foundEntity.get().getId());
+        entity.updateWithOldData(foundEntity.get());
         return this.contactRepository.save(entity);
     }
 

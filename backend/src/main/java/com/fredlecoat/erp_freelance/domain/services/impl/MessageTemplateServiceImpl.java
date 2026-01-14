@@ -29,7 +29,7 @@ public class MessageTemplateServiceImpl implements MessageTemplateService {
     @Override
     public MessageTemplateEntity update(MessageTemplateEntity entity, Long id) {
         Optional<MessageTemplateEntity> foundEntity = Optional.of(this.messageTemplateRepository.findById(id).orElseThrow());
-        entity.setId(foundEntity.get().getId());
+        entity.updateWithOldData(foundEntity.get());
         return this.messageTemplateRepository.save(entity);
     }
 

@@ -11,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,6 +20,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
+@Table(name = "attachments")
 public class AttachmentEntity {
     
     @Id
@@ -59,5 +61,10 @@ public class AttachmentEntity {
     @PreUpdate
     private void updateOn() {
         this.updatedOn = Instant.now();
+    }
+
+    public void updateWithOldData(AttachmentEntity entity) {
+        this.id = entity.getId();
+        this.createdOn = entity.getCreatedOn();
     }
 }

@@ -1,5 +1,7 @@
 package com.fredlecoat.erp_freelance.domain.entities;
 
+import java.time.Instant;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -8,6 +10,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,6 +21,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Setter
 @Getter
+@Table(name = "contacts")
 public class ContactEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,6 +47,12 @@ public class ContactEntity {
     @JoinColumn(name = "company_id")
     private CompanyEntity company;
 
+    @Column(nullable = false)
+    private Instant createdOn;
+
+    @Column(nullable = false)
+    private Instant updatedOn;
+
     public ContactEntity(
         String firstname, 
         String lastname, 
@@ -59,5 +71,20 @@ public class ContactEntity {
         this.company = company;
     }
 
+    @PrePersist
+    private void createOn() {
+        this.createdOn = Instant.now();
+        this.updatedOn = Instant.now();
+    }
+
+    @PreUpdate
+    private void updateOn() {
+        this.updatedOn = Instant.now();
+    }
+
+    public void updateWithOldData(ContactEntity entity) {
+        this.id = entity.getId();
+        this.createdOn = entity.getCreatedOn();
+    }
     
 }

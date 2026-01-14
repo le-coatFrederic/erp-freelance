@@ -1,5 +1,7 @@
 package com.fredlecoat.erp_freelance.domain.entities;
 
+import java.time.Instant;
+
 import com.fredlecoat.erp_freelance.domain.entities.values.MessageTemplateType;
 
 import jakarta.persistence.Column;
@@ -9,6 +11,8 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -33,7 +37,14 @@ public class MessageTemplateEntity {
     @Enumerated(EnumType.STRING)
     private MessageTemplateType type;
 
+    @Column(nullable = false)
     private String content;
+
+    @Column(nullable = false)
+    private Instant createdOn;
+
+    @Column(nullable = false)
+    private Instant updatedOn;
 
     public MessageTemplateEntity(
         String subject,
@@ -45,6 +56,22 @@ public class MessageTemplateEntity {
         this.description = description;
         this.type = type;
         this.content = content;
+    }
+
+    @PrePersist
+    private void createOn() {
+        this.createdOn = Instant.now();
+        this.updatedOn = Instant.now();
+    }
+
+    @PreUpdate
+    private void updateOn() {
+        this.updatedOn = Instant.now();
+    }
+
+    public void updateWithOldData(MessageTemplateEntity entity) {
+        this.id = entity.getId();
+        this.createdOn = entity.getCreatedOn();
     }
 
 }
