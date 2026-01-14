@@ -7,6 +7,10 @@ services:
     restart: unless-stopped
     ports:
       - "8081:80"
+    networks:
+      - erp-freelance-network:
+    depends_on:
+      backend:
 
   backend:
     build:
@@ -22,3 +26,10 @@ services:
       SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
       SPRING_JPA_DATABASE_PLATFORM: org.hibernate.dialect.PostgreSQLDialect
+    networks:
+      - erp-freelance-network:
+
+networks:
+  erp-freelance-network:
+    name: erp-freelance-network
+    driver: bridge  
