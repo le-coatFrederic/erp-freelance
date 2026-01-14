@@ -21,18 +21,20 @@ public class ContactEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String firstname;
 
+    @Column(nullable = false)
     private String lastname;
 
+    @Column(nullable = false)
     private String job;
 
-    @Column(nullable = true)
     private String email;
 
-    @Column(nullable = true)
     private String phone;
 
+    @Column(nullable = false)
     private String linkedin;
 
     @ManyToOne(fetch = FetchType.EAGER)

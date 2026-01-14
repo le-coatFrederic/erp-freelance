@@ -18,10 +18,13 @@ public class CompanyEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String name;
 
+    @Column(nullable = false)
     private String siret;
 
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private CompanyCategory category;
 
