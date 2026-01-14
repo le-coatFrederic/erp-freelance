@@ -38,7 +38,7 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public CompanyEntity getById(Long id) {
-        return Optional.of(this.companyRepository.getById(id)).orElseThrow();
+        return Optional.of(this.companyRepository.findById(id)).orElseThrow().get();
     }
 
     @Override
