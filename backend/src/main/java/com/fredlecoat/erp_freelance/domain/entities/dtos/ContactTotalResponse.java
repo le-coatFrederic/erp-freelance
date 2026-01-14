@@ -8,7 +8,7 @@ public record ContactTotalResponse(
     String email,
     String linkedin,
     String phone,
-    CompanyTotalResponse company
+    CompanyLightResponse company
 ) {
     
 }

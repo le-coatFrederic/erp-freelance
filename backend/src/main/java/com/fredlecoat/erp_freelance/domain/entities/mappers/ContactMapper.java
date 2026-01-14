@@ -24,8 +24,8 @@ public class ContactMapper {
         }
 
         return new ContactEntity(
-            dto.firstName(),
-            dto.lastName(),
+            dto.firstname(),
+            dto.lastname(),
             dto.job(),
             dto.email(),
             dto.phone(),
@@ -43,7 +43,7 @@ public class ContactMapper {
             entity.getEmail(),
             entity.getLinkedin(),
             entity.getPhone(),
-            this.companyMapper.toDto(entity.getCompany())
+            this.companyMapper.toLightDto(entity.getCompany())
         );
     }
 }
