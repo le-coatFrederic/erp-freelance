@@ -22,7 +22,7 @@ import com.fredlecoat.erp_freelance.domain.services.TaskStackService;
 import lombok.AllArgsConstructor;
 
 @RestController
-@RequestMapping("task-stacks")
+@RequestMapping("task_stacks")
 @AllArgsConstructor
 public class TaskStackController {
 
