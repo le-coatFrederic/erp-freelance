@@ -32,13 +32,13 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     public CompanyEntity update(CompanyEntity entity, Long id) {
         Optional<CompanyEntity> foundEntity = Optional.of(this.companyRepository.findById(id).orElseThrow());
-        entity.setId(foundEntity.get().getId());
+        entity.updateWithOldData(foundEntity.get());
         return this.companyRepository.save(entity);
     }
 
     @Override
     public CompanyEntity getById(Long id) {
-        return Optional.of(this.companyRepository.getById(id)).orElseThrow();
+        return Optional.of(this.companyRepository.findById(id)).orElseThrow().get();
     }
 
     @Override

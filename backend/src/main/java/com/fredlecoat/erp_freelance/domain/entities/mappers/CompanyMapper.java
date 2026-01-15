@@ -1,6 +1,7 @@
 package com.fredlecoat.erp_freelance.domain.entities.mappers;
 
 import com.fredlecoat.erp_freelance.domain.entities.CompanyEntity;
+import com.fredlecoat.erp_freelance.domain.entities.dtos.CompanyLightResponse;
 import com.fredlecoat.erp_freelance.domain.entities.dtos.CompanyTotalResponse;
 import com.fredlecoat.erp_freelance.domain.entities.dtos.CompanyWithoutIdRequest;
 import org.springframework.stereotype.Component;
@@ -23,6 +24,13 @@ public class CompanyMapper {
                 entity.getSiret(),
                 entity.getCategory(),
                 entity.getSize()
+        );
+    }
+
+    public CompanyLightResponse toLightDto(CompanyEntity entity) {
+        return new CompanyLightResponse(
+            entity.getId(),
+            entity.getName()
         );
     }
 }

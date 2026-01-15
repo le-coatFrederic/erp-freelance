@@ -1,0 +1,27 @@
+<h3>Contacts List</h3>
+<table>
+    <thead>
+        <td>Id</td>
+        <td>Firstname</td>
+        <td>Lastname</td>
+        <td>Job</td>
+        <td>Email</td>
+        <td>Phone</td>
+        <td>Linkedin</td>
+        <td>Company</td>
+    </thead>
+    <tbody>
+        @for (contact of contacts(); track $index) {
+            <tr>
+                <td>{{ contact.id }}</td>
+                <td>{{ contact.firstname }}</td>
+                <td>{{ contact.lastname }}</td>
+                <td>{{ contact.job }}</td>
+                <td>{{ contact.email }}</td>
+                <td>{{ contact.phone }}</td>
+                <td>{{ contact.linkedin }}</td>
+                <td>{{ contact.company.name }}</td>
+            </tr>
+        }
+    </tbody>
+</table>

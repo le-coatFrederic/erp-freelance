@@ -7,6 +7,10 @@ services:
     restart: unless-stopped
     ports:
       - "8081:80"
+    networks:
+      - erp-freelance-network
+    depends_on:
+      - backend
 
   backend:
     build:

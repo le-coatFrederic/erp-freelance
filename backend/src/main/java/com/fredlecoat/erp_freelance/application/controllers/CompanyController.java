@@ -1,6 +1,7 @@
 package com.fredlecoat.erp_freelance.application.controllers;
 
 import com.fredlecoat.erp_freelance.domain.entities.CompanyEntity;
+import com.fredlecoat.erp_freelance.domain.entities.dtos.CompanyLightResponse;
 import com.fredlecoat.erp_freelance.domain.entities.dtos.CompanyTotalResponse;
 import com.fredlecoat.erp_freelance.domain.entities.dtos.CompanyWithoutIdRequest;
 import com.fredlecoat.erp_freelance.domain.entities.mappers.CompanyMapper;
@@ -26,6 +27,15 @@ public class CompanyController {
         return ResponseEntity.ok(this.companyService.getAll()
                 .stream()
                 .map(this.companyMapper::toDto)
+                .toList()
+        );
+    }
+
+    @GetMapping("light")
+    public ResponseEntity<List<CompanyLightResponse>> getAllLightCompanies() {
+        return ResponseEntity.ok(this.companyService.getAll()
+                .stream()
+                .map(this.companyMapper::toLightDto)
                 .toList()
         );
     }

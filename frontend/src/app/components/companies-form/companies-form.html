@@ -1,0 +1,46 @@
+<h3>Create / Update Company</h3>
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <label>
+    Nom
+    <input type="text" formControlName="name">
+  </label>
+
+  @if (form.controls.name.touched && form.controls.name.invalid) {
+    <small>Nom requis (min 2 caractères)</small>
+  }
+
+  <label>
+    SIRET
+    <input type="text" formControlName="siret">
+  </label>
+
+  @if (form.controls.siret.touched && form.controls.siret.invalid) {
+    <small>SIRET invalide (14 chiffres)</small>
+  }
+
+  <label>
+    Catégorie
+    <select formControlName="category">
+        @for (c of categories; track c) {
+    <option [value]="c">{{ companyTypeMapper[c] }}</option>
+  }
+</select>
+  </label>
+
+  <label>
+    Taille
+    <input type="number" formControlName="size" min="1">
+  </label>
+
+  <button type="submit" [disabled]="isSubmitting()">
+    @if (isSubmitting()) { Création... } @else { Créer la société }
+  </button>
+
+  @if (error()) {
+    <p style="color:red">{{ error() }}</p>
+  }
+
+  @if (success()) {
+    <p style="color:green">Société créée avec succès</p>
+  }
+</form>
