@@ -34,7 +34,7 @@ public class TaskStackController {
         return ResponseEntity.ok(
             taskStackService.getAll()
                 .stream()
-                .map(taskStackMapper::toDto)
+                .map(taskStackMapper::toDtoWithTransitions)
                 .toList()
         );
     }
@@ -42,7 +42,7 @@ public class TaskStackController {
     @GetMapping("/{id}")
     public ResponseEntity<TaskStackTotalResponse> get(@PathVariable Long id) {
         return ResponseEntity.ok(
-            taskStackMapper.toDto(taskStackService.getById(id))
+            taskStackMapper.toDtoWithTransitions(taskStackService.getById(id))
         );
     }
 

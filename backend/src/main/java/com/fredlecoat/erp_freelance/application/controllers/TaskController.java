@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fredlecoat.erp_freelance.domain.entities.TaskEntity;
+import com.fredlecoat.erp_freelance.domain.entities.dtos.TaskMoveRequest;
 import com.fredlecoat.erp_freelance.domain.entities.dtos.TaskTotalResponse;
 import com.fredlecoat.erp_freelance.domain.entities.dtos.TaskWithoutIdRequest;
 import com.fredlecoat.erp_freelance.domain.entities.mappers.TaskMapper;
@@ -67,5 +68,18 @@ public class TaskController {
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         taskService.delete(id);
         return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/{id}/move")
+    public ResponseEntity<TaskTotalResponse> moveTask(
+        @PathVariable Long id,
+        @RequestBody TaskMoveRequest request
+    ) {
+        TaskEntity movedTask = taskService.moveTask(
+            id,
+            request.destination_stack_id(),
+            request.transition_id()
+        );
+        return ResponseEntity.ok(taskMapper.toDto(movedTask));
     }
 }
