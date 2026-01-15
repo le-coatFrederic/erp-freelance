@@ -24,3 +24,10 @@ services:
       SPRING_DATASOURCE_URL: ${POSTGRES_URL}
       SPRING_DATASOURCE_USERNAME: ${POSTGRES_USERNAME}
       SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
+    networks:
+      - erp-freelance-network
+
+networks:
+  erp-freelance-network:
+    name: erp-freelance-network
+    driver: bridge
