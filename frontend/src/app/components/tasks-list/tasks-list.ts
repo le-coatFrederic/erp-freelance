@@ -1,10 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { TaskService } from '../../services/task-service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-tasks-list',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './tasks-list.html',
   styleUrl: './tasks-list.scss',
 })

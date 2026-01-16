@@ -20,6 +20,7 @@
   --color-bg: #ffffff;
   --color-bg-alt: #f8fafc;
   --color-bg-hover: #f1f5f9;
+  --color-surface: #f1f5f9;
 
   /* Spacing */
   --spacing-xs: 0.25rem;   /* 4px */
@@ -40,6 +41,7 @@
 
   /* Borders */
   --border-radius: 0.375rem;  /* 6px */
+  --border-radius-md: 0.375rem;  /* 6px */
   --border-radius-lg: 0.5rem;  /* 8px */
   --border-width: 1px;
 
@@ -304,6 +306,52 @@ button[type="submit"],
 
   &:hover:not(:disabled) {
     background-color: #15803d;
+  }
+}
+
+/* Submit Button */
+.btn-submit {
+  background-color: var(--color-primary);
+  color: white;
+  width: 100%;
+  padding: var(--spacing-md) var(--spacing-lg);
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  margin-top: var(--spacing-lg);
+
+  &:hover:not(:disabled) {
+    background-color: var(--color-primary-dark);
+    box-shadow: var(--shadow-md);
+  }
+}
+
+/* Detail Button */
+.btn-detail {
+  display: inline-block;
+  background-color: var(--color-primary);
+  color: white;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  border: none;
+  border-radius: var(--border-radius);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color var(--transition-fast), box-shadow var(--transition-fast);
+  white-space: nowrap;
+
+  &:hover {
+    background-color: var(--color-primary-dark);
+    box-shadow: var(--shadow-sm);
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  }
+
+  &:active {
+    transform: translateY(1px);
   }
 }
 

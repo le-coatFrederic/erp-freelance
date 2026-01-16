@@ -4,10 +4,11 @@ import { Observable } from 'rxjs';
 import { NgForOf } from "../../../../node_modules/@angular/common/types/_common_module-chunk";
 import { CompanyService } from '../../services/company-service';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-companies-list',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './companies-list.html',
   styleUrl: './companies-list.scss',
 })

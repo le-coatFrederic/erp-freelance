@@ -1,0 +1,82 @@
+<h2>Détails du modèle de message</h2>
+
+@if (isLoading()) {
+  <p>Chargement...</p>
+} @else if (messageTemplate()) {
+  <div class="info-container">
+    <h3>Informations</h3>
+    <p><strong>ID:</strong> {{ messageTemplate()!.id }}</p>
+    <p><strong>Sujet:</strong> {{ messageTemplate()!.subject }}</p>
+    <p><strong>Description:</strong> {{ messageTemplate()!.description }}</p>
+    <p><strong>Type:</strong> {{ templateTypeMapper[messageTemplate()!.type] }}</p>
+    <p><strong>Contenu:</strong></p>
+    <pre>{{ messageTemplate()!.content }}</pre>
+  </div>
+
+  <div class="form-container">
+    <h3>Modifier</h3>
+    <form [formGroup]="form" (ngSubmit)="submit()">
+
+      <div class="form-group">
+        <label for="subject">Sujet</label>
+        <input
+          type="text"
+          id="subject"
+          formControlName="subject"
+          [class.invalid]="form.controls.subject.touched && form.controls.subject.invalid"
+        >
+        @if (form.controls.subject.touched && form.controls.subject.invalid) {
+          <small class="form-error">Sujet requis (min 2 caractères)</small>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea
+          id="description"
+          formControlName="description"
+        ></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="type">Type</label>
+        <select
+          id="type"
+          formControlName="type"
+        >
+          @for (t of templateTypes; track t) {
+            <option [value]="t">{{ templateTypeMapper[t] }}</option>
+          }
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="content">Contenu</label>
+        <textarea
+          id="content"
+          formControlName="content"
+          [class.invalid]="form.controls.content.touched && form.controls.content.invalid"
+          rows="8"
+        ></textarea>
+        @if (form.controls.content.touched && form.controls.content.invalid) {
+          <small class="form-error">Contenu requis</small>
+        }
+      </div>
+
+      <button type="submit" [disabled]="isSubmitting()" class="btn-submit">
+        @if (isSubmitting()) { Mise à jour... } @else { Mettre à jour }
+      </button>
+
+      @if (error()) {
+        <div class="message message-error">{{ error() }}</div>
+      }
+
+      @if (success()) {
+        <div class="message message-success">Modèle de message mis à jour avec succès</div>
+      }
+
+    </form>
+  </div>
+} @else {
+  <p style="color:red">Modèle de message non trouvé</p>
+}

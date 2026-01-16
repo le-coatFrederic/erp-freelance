@@ -10,6 +10,7 @@
           <th>ID</th>
           <th>Nom</th>
           <th>Description</th>
+          <th>Finale</th>
           <th>Transitions sortantes</th>
           <th>Action</th>
         </tr>
@@ -20,6 +21,7 @@
             <td>{{ stack.id }}</td>
             <td>{{ stack.name }}</td>
             <td>{{ stack.description }}</td>
+            <td>{{ stack.is_completed }}</td>
             <td>{{ stack.outgoing_transitions?.length || 0 }}</td>
             <td>
               <a [routerLink]="['/task-stacks', stack.id]" class="btn-detail">Détails</a>

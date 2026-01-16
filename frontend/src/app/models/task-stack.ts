@@ -9,5 +9,6 @@ export interface TaskStackResponse {
   id: number;
   name: string;
   description: string;
+  is_completed: boolean;
   outgoing_transitions?: TaskStackTransitionResponse[];
 }

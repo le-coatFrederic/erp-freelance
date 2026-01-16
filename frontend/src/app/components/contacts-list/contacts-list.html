@@ -15,6 +15,7 @@
           <th>Phone</th>
           <th>Linkedin</th>
           <th>Company</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -28,6 +29,9 @@
             <td>{{ contact.phone }}</td>
             <td>{{ contact.linkedin }}</td>
             <td>{{ contact.company.name }}</td>
+            <td>
+              <a [routerLink]="['/contacts', contact.id]" class="btn-detail">Détails</a>
+            </td>
           </tr>
         }
       </tbody>

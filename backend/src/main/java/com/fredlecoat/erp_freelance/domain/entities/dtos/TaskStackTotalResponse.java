@@ -6,6 +6,6 @@ public record TaskStackTotalResponse(
     Long id,
     String name,
     String description,
-    Boolean isCompleted,
+    Boolean is_completed,
     List<TaskStackTransitionTotalResponse> outgoing_transitions
 ) {}

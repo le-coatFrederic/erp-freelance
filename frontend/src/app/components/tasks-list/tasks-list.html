@@ -13,6 +13,7 @@
           <th>Catégorie</th>
           <th>Contact</th>
           <th>Stack</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -24,6 +25,9 @@
             <td>{{ task.category }}</td>
             <td>{{ task.contact.firstname }} {{ task.contact.lastname }}</td>
             <td>{{ task.task_stack.name }}</td>
+            <td>
+              <a [routerLink]="['/tasks', task.id]" class="btn-detail">Détails</a>
+            </td>
           </tr>
         }
       </tbody>

@@ -8,16 +8,21 @@ import { ContactRequest, ContactResponse } from '../models/contact';
 })
 export class ContactService {
   private api = inject(ApiService);
+  private url = 'contacts';
 
   getContacts(): Observable<ContactResponse[]> {
-    return this.api.get<ContactResponse[]>('contacts');
+    return this.api.get<ContactResponse[]>(this.url);
   }
 
   getAvailableForTask(): Observable<ContactResponse[]> {
-    return this.api.get<ContactResponse[]>('contacts/available-for-task');
+    return this.api.get<ContactResponse[]>(`${this.url}/available-for-task`);
   }
 
-  createContact(body: ContactRequest) {
-    return this.api.post<ContactRequest>('contacts', body);
+  createContact(body: ContactRequest): Observable<ContactResponse> {
+    return this.api.post<ContactResponse>(this.url, body);
+  }
+
+  update(id: number, body: ContactRequest): Observable<ContactResponse> {
+    return this.api.put<ContactResponse>(`${this.url}/${id}`, body);
   }
 }

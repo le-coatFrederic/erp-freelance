@@ -1,0 +1,125 @@
+<h2>Détails du contact</h2>
+
+@if (isLoading()) {
+  <p>Chargement...</p>
+} @else if (contact()) {
+  <div class="info-container">
+    <h3>Informations</h3>
+    <p><strong>ID:</strong> {{ contact()!.id }}</p>
+    <p><strong>Prénom:</strong> {{ contact()!.firstname }}</p>
+    <p><strong>Nom:</strong> {{ contact()!.lastname }}</p>
+    <p><strong>Job:</strong> {{ contact()!.job }}</p>
+    <p><strong>Email:</strong> {{ contact()!.email }}</p>
+    <p><strong>Téléphone:</strong> {{ contact()!.phone }}</p>
+    <p><strong>LinkedIn:</strong> {{ contact()!.linkedin }}</p>
+    <p><strong>Société:</strong> {{ contact()!.company.name }}</p>
+  </div>
+
+  <div class="form-container">
+    <h3>Modifier</h3>
+    <form [formGroup]="form" (ngSubmit)="submit()">
+
+      <div class="form-group">
+        <label for="firstname">Prénom</label>
+        <input
+          type="text"
+          id="firstname"
+          formControlName="firstname"
+          [class.invalid]="form.controls.firstname.touched && form.controls.firstname.invalid"
+        >
+        @if (form.controls.firstname.touched && form.controls.firstname.invalid) {
+          <small class="form-error">Prénom requis (min 2 caractères)</small>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="lastname">Nom</label>
+        <input
+          type="text"
+          id="lastname"
+          formControlName="lastname"
+          [class.invalid]="form.controls.lastname.touched && form.controls.lastname.invalid"
+        >
+        @if (form.controls.lastname.touched && form.controls.lastname.invalid) {
+          <small class="form-error">Nom requis (min 2 caractères)</small>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="job">Job</label>
+        <input
+          type="text"
+          id="job"
+          formControlName="job"
+          [class.invalid]="form.controls.job.touched && form.controls.job.invalid"
+        >
+        @if (form.controls.job.touched && form.controls.job.invalid) {
+          <small class="form-error">Job requis</small>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          [class.invalid]="form.controls.email.touched && form.controls.email.invalid"
+        >
+        @if (form.controls.email.touched && form.controls.email.invalid) {
+          <small class="form-error">Email invalide</small>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Téléphone</label>
+        <input
+          type="text"
+          id="phone"
+          formControlName="phone"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="linkedin">LinkedIn</label>
+        <input
+          type="text"
+          id="linkedin"
+          formControlName="linkedin"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="company">Société</label>
+        <select
+          id="company"
+          formControlName="company_id"
+          [class.invalid]="form.controls.company_id.touched && form.controls.company_id.invalid"
+        >
+          <option [value]="0">-- Sélectionner --</option>
+          @for (c of companies(); track c.id) {
+            <option [value]="c.id">{{ c.name }}</option>
+          }
+        </select>
+        @if (form.controls.company_id.touched && form.controls.company_id.invalid) {
+          <small class="form-error">Société requise</small>
+        }
+      </div>
+
+      <button type="submit" [disabled]="isSubmitting()" class="btn-submit">
+        @if (isSubmitting()) { Mise à jour... } @else { Mettre à jour }
+      </button>
+
+      @if (error()) {
+        <div class="message message-error">{{ error() }}</div>
+      }
+
+      @if (success()) {
+        <div class="message message-success">Contact mis à jour avec succès</div>
+      }
+
+    </form>
+  </div>
+} @else {
+  <p style="color:red">Contact non trouvé</p>
+}

@@ -1,0 +1,67 @@
+<h2>Détails de la pièce jointe</h2>
+
+@if (isLoading()) {
+  <p>Chargement...</p>
+} @else if (attachment()) {
+  <div class="info-container">
+    <h3>Informations</h3>
+    <p><strong>ID:</strong> {{ attachment()!.id }}</p>
+    <p><strong>Nom:</strong> {{ attachment()!.name }}</p>
+    <p><strong>Description:</strong> {{ attachment()!.description }}</p>
+    <p><strong>Type:</strong> {{ attachmentTypeMapper[attachment()!.type] }}</p>
+  </div>
+
+  <div class="form-container">
+    <h3>Modifier</h3>
+    <form [formGroup]="form" (ngSubmit)="submit()">
+
+      <div class="form-group">
+        <label for="name">Nom</label>
+        <input
+          type="text"
+          id="name"
+          formControlName="name"
+          [class.invalid]="form.controls.name.touched && form.controls.name.invalid"
+        >
+        @if (form.controls.name.touched && form.controls.name.invalid) {
+          <small class="form-error">Nom requis (min 2 caractères)</small>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea
+          id="description"
+          formControlName="description"
+        ></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="type">Type</label>
+        <select
+          id="type"
+          formControlName="type"
+        >
+          @for (t of attachmentTypes; track t) {
+            <option [value]="t">{{ attachmentTypeMapper[t] }}</option>
+          }
+        </select>
+      </div>
+
+      <button type="submit" [disabled]="isSubmitting()" class="btn-submit">
+        @if (isSubmitting()) { Mise à jour... } @else { Mettre à jour }
+      </button>
+
+      @if (error()) {
+        <div class="message message-error">{{ error() }}</div>
+      }
+
+      @if (success()) {
+        <div class="message message-success">Pièce jointe mise à jour avec succès</div>
+      }
+
+    </form>
+  </div>
+} @else {
+  <p style="color:red">Pièce jointe non trouvée</p>
+}

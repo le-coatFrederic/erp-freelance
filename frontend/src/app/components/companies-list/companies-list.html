@@ -12,6 +12,7 @@
           <th>Siret</th>
           <th>Category</th>
           <th>Size</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -22,6 +23,9 @@
             <td>{{ company.siret }}</td>
             <td>{{ company.category }}</td>
             <td>{{ company.size }}</td>
+            <td>
+              <a [routerLink]="['/companies', company.id]" class="btn-detail">Détails</a>
+            </td>
           </tr>
         }
       </tbody>

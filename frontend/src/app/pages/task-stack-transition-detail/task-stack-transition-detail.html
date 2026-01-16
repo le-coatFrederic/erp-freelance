@@ -1,0 +1,93 @@
+<h2>Détails de la transition de stack</h2>
+
+@if (isLoading()) {
+  <p>Chargement...</p>
+} @else if (transition()) {
+  <div class="info-container">
+    <h3>Informations</h3>
+    <p><strong>ID:</strong> {{ transition()!.id }}</p>
+    <p><strong>Stack source:</strong> {{ transition()!.source_stack.name }}</p>
+    <p><strong>Stack destination:</strong> {{ transition()!.destination_stack.name }}</p>
+    <p><strong>Type de transition:</strong> {{ transitionTypeMapper[transition()!.transition_type] }}</p>
+    @if (transition()!.auto_transition_threshold_hours) {
+      <p><strong>Seuil de transition automatique (heures):</strong> {{ transition()!.auto_transition_threshold_hours }}</p>
+    }
+  </div>
+
+  <div class="form-container">
+    <h3>Modifier</h3>
+    <form [formGroup]="form" (ngSubmit)="submit()">
+
+      <div class="form-group">
+        <label for="sourceStack">Stack source</label>
+        <select
+          id="sourceStack"
+          formControlName="source_stack_id"
+          [class.invalid]="form.controls.source_stack_id.touched && form.controls.source_stack_id.invalid"
+        >
+          <option [value]="0">-- Sélectionner --</option>
+          @for (s of taskStacks(); track s.id) {
+            <option [value]="s.id">{{ s.name }}</option>
+          }
+        </select>
+        @if (form.controls.source_stack_id.touched && form.controls.source_stack_id.invalid) {
+          <small class="form-error">Stack source requise</small>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="destinationStack">Stack destination</label>
+        <select
+          id="destinationStack"
+          formControlName="destination_stack_id"
+          [class.invalid]="form.controls.destination_stack_id.touched && form.controls.destination_stack_id.invalid"
+        >
+          <option [value]="0">-- Sélectionner --</option>
+          @for (s of taskStacks(); track s.id) {
+            <option [value]="s.id">{{ s.name }}</option>
+          }
+        </select>
+        @if (form.controls.destination_stack_id.touched && form.controls.destination_stack_id.invalid) {
+          <small class="form-error">Stack destination requise</small>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="transitionType">Type de transition</label>
+        <select
+          id="transitionType"
+          formControlName="transition_type"
+        >
+          @for (t of transitionTypes; track t) {
+            <option [value]="t">{{ transitionTypeMapper[t] }}</option>
+          }
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="threshold">Seuil de transition automatique (heures)</label>
+        <input
+          type="number"
+          id="threshold"
+          formControlName="auto_transition_threshold_hours"
+          min="0"
+        >
+      </div>
+
+      <button type="submit" [disabled]="isSubmitting()" class="btn-submit">
+        @if (isSubmitting()) { Mise à jour... } @else { Mettre à jour }
+      </button>
+
+      @if (error()) {
+        <div class="message message-error">{{ error() }}</div>
+      }
+
+      @if (success()) {
+        <div class="message message-success">Transition mise à jour avec succès</div>
+      }
+
+    </form>
+  </div>
+} @else {
+  <p style="color:red">Transition non trouvée</p>
+}
