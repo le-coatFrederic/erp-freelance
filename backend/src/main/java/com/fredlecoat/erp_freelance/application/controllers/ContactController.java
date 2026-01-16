@@ -31,6 +31,15 @@ public class ContactController {
         );
     }
 
+    @GetMapping("/available-for-task")
+    public ResponseEntity<List<ContactTotalResponse>> getAvailableForTask() {
+        return ResponseEntity.ok(this.contactService.getAvailableForTask()
+                .stream()
+                .map(this.contactMapper::toDto)
+                .toList()
+        );
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<ContactTotalResponse> getCompany(@PathVariable Long id) {
         ContactTotalResponse dto = this.contactMapper.toDto(this.contactService.getById(id));

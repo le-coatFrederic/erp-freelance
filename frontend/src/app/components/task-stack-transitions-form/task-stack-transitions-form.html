@@ -1,0 +1,71 @@
+<div class="form-container">
+  <h3>Créer une transition</h3>
+  <form [formGroup]="form" (ngSubmit)="submit()">
+
+    <div class="form-group">
+      <label for="source_stack_id">Stack source</label>
+      <select
+        id="source_stack_id"
+        formControlName="source_stack_id"
+        [class.invalid]="form.controls.source_stack_id.touched && form.controls.source_stack_id.invalid"
+      >
+        <option [value]="0">-- Sélectionner --</option>
+        @for (s of taskStacks(); track s.id) {
+          <option [value]="s.id">{{ s.name }}</option>
+        }
+      </select>
+      @if (form.controls.source_stack_id.touched && form.controls.source_stack_id.invalid) {
+        <small class="form-error">Stack source requise</small>
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="destination_stack_id">Stack destination</label>
+      <select
+        id="destination_stack_id"
+        formControlName="destination_stack_id"
+        [class.invalid]="form.controls.destination_stack_id.touched && form.controls.destination_stack_id.invalid"
+      >
+        <option [value]="0">-- Sélectionner --</option>
+        @for (s of taskStacks(); track s.id) {
+          <option [value]="s.id">{{ s.name }}</option>
+        }
+      </select>
+      @if (form.controls.destination_stack_id.touched && form.controls.destination_stack_id.invalid) {
+        <small class="form-error">Stack destination requise</small>
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="transition_type">Type</label>
+      <select id="transition_type" formControlName="transition_type">
+        @for (t of types; track t) {
+          <option [value]="t">{{ typeMapper[t] }}</option>
+        }
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="auto_transition_threshold_hours">Seuil automatique (heures)</label>
+      <input
+        type="number"
+        id="auto_transition_threshold_hours"
+        formControlName="auto_transition_threshold_hours"
+        min="1"
+      >
+    </div>
+
+    <button type="submit" [disabled]="isSubmitting()" class="btn-submit">
+      @if (isSubmitting()) { Création... } @else { Créer }
+    </button>
+
+    @if (error()) {
+      <div class="message message-error">{{ error() }}</div>
+    }
+
+    @if (success()) {
+      <div class="message message-success">Transition créée avec succès</div>
+    }
+
+  </form>
+</div>

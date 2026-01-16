@@ -1,0 +1,102 @@
+<div class="form-container">
+  <h3>Créer une tâche</h3>
+  <form [formGroup]="form" (ngSubmit)="submit()">
+
+    <div class="form-group">
+      <label for="name">Nom</label>
+      <input
+        type="text"
+        id="name"
+        formControlName="name"
+        [class.invalid]="form.controls.name.touched && form.controls.name.invalid"
+      >
+      @if (form.controls.name.touched && form.controls.name.invalid) {
+        <small class="form-error">Nom requis (min 2 caractères)</small>
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea
+        id="description"
+        formControlName="description"
+      ></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="category">Catégorie</label>
+      <select
+        id="category"
+        formControlName="category"
+      >
+        @for (c of categories; track c) {
+          <option [value]="c">{{ categoryMapper[c] }}</option>
+        }
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="messageTemplate">Modèle de message</label>
+      <select
+        id="messageTemplate"
+        formControlName="message_template_id"
+        [class.invalid]="form.controls.message_template_id.touched && form.controls.message_template_id.invalid"
+      >
+        <option [value]="0">-- Sélectionner --</option>
+        @for (t of messageTemplates(); track t.id) {
+          <option [value]="t.id">{{ t.subject }}</option>
+        }
+      </select>
+      @if (form.controls.message_template_id.touched && form.controls.message_template_id.invalid) {
+        <small class="form-error">Modèle de message requis</small>
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="contact">Contact</label>
+      <select
+        id="contact"
+        formControlName="contact_id"
+        [class.invalid]="form.controls.contact_id.touched && form.controls.contact_id.invalid"
+      >
+        <option [value]="0">-- Sélectionner --</option>
+        @for (c of contacts(); track c.id) {
+          <option [value]="c.id">{{ c.firstname }} {{ c.lastname }}</option>
+        }
+      </select>
+      @if (form.controls.contact_id.touched && form.controls.contact_id.invalid) {
+        <small class="form-error">Contact requis</small>
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="taskStack">Stack de tâches</label>
+      <select
+        id="taskStack"
+        formControlName="task_stack_id"
+        [class.invalid]="form.controls.task_stack_id.touched && form.controls.task_stack_id.invalid"
+      >
+        <option [value]="0">-- Sélectionner --</option>
+        @for (s of taskStacks(); track s.id) {
+          <option [value]="s.id">{{ s.name }}</option>
+        }
+      </select>
+      @if (form.controls.task_stack_id.touched && form.controls.task_stack_id.invalid) {
+        <small class="form-error">Stack de tâches requis</small>
+      }
+    </div>
+
+    <button type="submit" [disabled]="isSubmitting()" class="btn-submit">
+      @if (isSubmitting()) { Création... } @else { Créer }
+    </button>
+
+    @if (error()) {
+      <div class="message message-error">{{ error() }}</div>
+    }
+
+    @if (success()) {
+      <div class="message message-success">Tâche créée avec succès</div>
+    }
+
+  </form>
+</div>

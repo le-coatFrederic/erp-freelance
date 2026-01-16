@@ -39,6 +39,9 @@ public class TaskStackEntity {
     private String description;
 
     @Column(nullable = false)
+    private Boolean isCompleted = false;
+
+    @Column(nullable = false)
     private Instant createdOn;
 
     @Column(nullable = false)
@@ -47,6 +50,13 @@ public class TaskStackEntity {
     public TaskStackEntity(String name, String description) {
         this.name = name;
         this.description = description;
+        this.isCompleted = false;
+    }
+
+    public TaskStackEntity(String name, String description, Boolean isCompleted) {
+        this.name = name;
+        this.description = description;
+        this.isCompleted = isCompleted != null ? isCompleted : false;
     }
 
     @PrePersist

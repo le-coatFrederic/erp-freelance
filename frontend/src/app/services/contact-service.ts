@@ -13,6 +13,10 @@ export class ContactService {
     return this.api.get<ContactResponse[]>('contacts');
   }
 
+  getAvailableForTask(): Observable<ContactResponse[]> {
+    return this.api.get<ContactResponse[]>('contacts/available-for-task');
+  }
+
   createContact(body: ContactRequest) {
     return this.api.post<ContactRequest>('contacts', body);
   }

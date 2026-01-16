@@ -39,4 +39,16 @@ export class ApiService {
     return this.http.post<T>(`${this.baseUrl}${uri}`, body, { params: httpParams })
       .pipe(catchError(err => this.handleError(err)));
   }
+
+  put<T>(uri: string, body: any, params?: Record<string, any>): Observable<T> {
+    const httpParams = toHttpParams(params);
+    return this.http.put<T>(`${this.baseUrl}${uri}`, body, { params: httpParams })
+      .pipe(catchError(err => this.handleError(err)));
+  }
+
+  delete<T>(uri: string, params?: Record<string, any>): Observable<T> {
+    const httpParams = toHttpParams(params);
+    return this.http.delete<T>(`${this.baseUrl}${uri}`, { params: httpParams })
+      .pipe(catchError(err => this.handleError(err)));
+  }
 }

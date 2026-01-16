@@ -1,0 +1,16 @@
+.list-container {
+  padding: var(--spacing-lg);
+
+  h3 {
+    margin-bottom: var(--spacing-lg);
+    color: var(--color-primary);
+  }
+
+  .empty-state {
+    text-align: center;
+    color: var(--color-text-light);
+    padding: var(--spacing-2xl);
+    font-style: italic;
+    font-size: var(--font-size-base);
+  }
+}

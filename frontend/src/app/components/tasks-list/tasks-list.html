@@ -1,0 +1,32 @@
+<div class="list-container">
+  <h3>Tâches</h3>
+
+  @if (tasks().length === 0) {
+    <p class="empty-state">Aucune tâche disponible</p>
+  } @else {
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nom</th>
+          <th>Description</th>
+          <th>Catégorie</th>
+          <th>Contact</th>
+          <th>Stack</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (task of tasks(); track task.id) {
+          <tr>
+            <td>{{ task.id }}</td>
+            <td>{{ task.name }}</td>
+            <td>{{ task.description }}</td>
+            <td>{{ task.category }}</td>
+            <td>{{ task.contact.firstname }} {{ task.contact.lastname }}</td>
+            <td>{{ task.task_stack.name }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</div>

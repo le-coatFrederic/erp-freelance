@@ -1,46 +1,63 @@
-<h3>Create / Update Company</h3>
-<form [formGroup]="form" (ngSubmit)="submit()">
-  <label>
-    Nom
-    <input type="text" formControlName="name">
-  </label>
+<div class="form-container">
+  <h3>Create / Update Company</h3>
+  <form [formGroup]="form" (ngSubmit)="submit()">
 
-  @if (form.controls.name.touched && form.controls.name.invalid) {
-    <small>Nom requis (min 2 caractères)</small>
-  }
+    <div class="form-group">
+      <label for="name">Nom</label>
+      <input
+        type="text"
+        id="name"
+        formControlName="name"
+        [class.invalid]="form.controls.name.touched && form.controls.name.invalid"
+      >
+      @if (form.controls.name.touched && form.controls.name.invalid) {
+        <small class="form-error">Nom requis (min 2 caractères)</small>
+      }
+    </div>
 
-  <label>
-    SIRET
-    <input type="text" formControlName="siret">
-  </label>
+    <div class="form-group">
+      <label for="siret">SIRET</label>
+      <input
+        type="text"
+        id="siret"
+        formControlName="siret"
+        [class.invalid]="form.controls.siret.touched && form.controls.siret.invalid"
+      >
+      @if (form.controls.siret.touched && form.controls.siret.invalid) {
+        <small class="form-error">SIRET invalide (14 chiffres)</small>
+      }
+    </div>
 
-  @if (form.controls.siret.touched && form.controls.siret.invalid) {
-    <small>SIRET invalide (14 chiffres)</small>
-  }
-
-  <label>
-    Catégorie
-    <select formControlName="category">
+    <div class="form-group">
+      <label for="category">Catégorie</label>
+      <select id="category" formControlName="category">
         @for (c of categories; track c) {
-    <option [value]="c">{{ companyTypeMapper[c] }}</option>
-  }
-</select>
-  </label>
+          <option [value]="c">{{ companyTypeMapper[c] }}</option>
+        }
+      </select>
+    </div>
 
-  <label>
-    Taille
-    <input type="number" formControlName="size" min="1">
-  </label>
+    <div class="form-group">
+      <label for="size">Taille</label>
+      <input
+        type="number"
+        id="size"
+        formControlName="size"
+        min="1"
+      >
+    </div>
 
-  <button type="submit" [disabled]="isSubmitting()">
-    @if (isSubmitting()) { Création... } @else { Créer la société }
-  </button>
+    <button type="submit" [disabled]="isSubmitting()" class="btn-submit">
+      @if (isSubmitting()) { Création... } @else { Créer la société }
+    </button>
 
-  @if (error()) {
-    <p style="color:red">{{ error() }}</p>
-  }
+    @if (error()) {
+      <div class="message message-error">{{ error() }}</div>
+    }
 
-  @if (success()) {
-    <p style="color:green">Société créée avec succès</p>
-  }
-</form>
+    @if (success()) {
+      <div class="message message-success">Société créée avec succès</div>
+    }
+
+  </form>
+</div>

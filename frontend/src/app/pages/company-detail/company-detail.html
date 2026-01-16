@@ -1,0 +1,63 @@
+<h2>Détails de la société</h2>
+
+@if (isLoading()) {
+  <p>Chargement...</p>
+} @else if (company()) {
+  <div>
+    <h3>Informations</h3>
+    <p><strong>ID:</strong> {{ company()!.id }}</p>
+    <p><strong>Nom:</strong> {{ company()!.name }}</p>
+    <p><strong>SIRET:</strong> {{ company()!.siret }}</p>
+    <p><strong>Catégorie:</strong> {{ companyTypeMapper[company()!.category] }}</p>
+    <p><strong>Taille:</strong> {{ company()!.size }}</p>
+  </div>
+
+  <h3>Modifier</h3>
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <label>
+      Nom
+      <input type="text" formControlName="name">
+    </label>
+
+    @if (form.controls.name.touched && form.controls.name.invalid) {
+      <small>Nom requis (min 2 caractères)</small>
+    }
+
+    <label>
+      SIRET
+      <input type="text" formControlName="siret">
+    </label>
+
+    @if (form.controls.siret.touched && form.controls.siret.invalid) {
+      <small>SIRET invalide (14 chiffres)</small>
+    }
+
+    <label>
+      Catégorie
+      <select formControlName="category">
+        @for (c of categories; track c) {
+          <option [value]="c">{{ companyTypeMapper[c] }}</option>
+        }
+      </select>
+    </label>
+
+    <label>
+      Taille
+      <input type="number" formControlName="size" min="1">
+    </label>
+
+    <button type="submit" [disabled]="isSubmitting()">
+      @if (isSubmitting()) { Mise à jour... } @else { Mettre à jour }
+    </button>
+
+    @if (error()) {
+      <p style="color:red">{{ error() }}</p>
+    }
+
+    @if (success()) {
+      <p style="color:green">Société mise à jour avec succès</p>
+    }
+  </form>
+} @else {
+  <p style="color:red">Société non trouvée</p>
+}

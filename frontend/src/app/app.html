@@ -1,3 +1,16 @@
-<h1>ERP - Freelance</h1>
-<app-contacts />
-<app-companies />
+<div class="component">
+  <nav>
+  <a routerLink="/companies" routerLinkActive="active">Sociétés</a>
+  <a routerLink="/contacts" routerLinkActive="active">Contacts</a>
+  <a routerLink="/attachments" routerLinkActive="active">Pièces jointes</a>
+  <a routerLink="/message-templates" routerLinkActive="active">Modèles de messages</a>
+  <a routerLink="/tasks" routerLinkActive="active">Tâches</a>
+  <a routerLink="/task-stacks" routerLinkActive="active">Stacks</a>
+  <a routerLink="/task-stack-transitions" routerLinkActive="active">Transitions</a>
+  <a routerLink="/history" routerLinkActive="active">Historique</a>
+</nav>
+</div>
+
+<div class="container">
+  <router-outlet />
+</div>

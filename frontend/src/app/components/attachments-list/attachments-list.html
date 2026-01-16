@@ -1,0 +1,32 @@
+<div class="list-container">
+  <h3>Pièces jointes</h3>
+
+  @if (attachments().length === 0) {
+    <p class="empty-state">Aucune pièce jointe disponible</p>
+  } @else {
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nom</th>
+          <th>Description</th>
+          <th>Type</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (attachment of attachments(); track attachment.id) {
+          <tr>
+            <td>{{ attachment.id }}</td>
+            <td>{{ attachment.name }}</td>
+            <td>{{ attachment.description }}</td>
+            <td>{{ attachment.type }}</td>
+            <td>
+              <a [routerLink]="['/attachments', attachment.id]" class="btn-detail">Détails</a>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</div>

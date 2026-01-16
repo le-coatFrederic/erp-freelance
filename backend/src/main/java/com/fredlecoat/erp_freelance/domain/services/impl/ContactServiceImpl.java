@@ -43,4 +43,9 @@ public class ContactServiceImpl implements ContactService {
         this.contactRepository.deleteById(id);
     }
 
+    @Override
+    public List<ContactEntity> getAvailableForTask() {
+        return this.contactRepository.findContactsWithoutActiveTasks();
+    }
+
 }

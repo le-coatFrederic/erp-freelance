@@ -1,0 +1,32 @@
+<div class="list-container">
+  <h3>Historique</h3>
+
+  @if (history().length === 0) {
+    <p class="empty-state">Aucun historique disponible</p>
+  } @else {
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Modèle de message</th>
+          <th>Type de changement</th>
+          <th>Date</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of history(); track item.id) {
+          <tr>
+            <td>{{ item.id }}</td>
+            <td>{{ item.message_template.subject }}</td>
+            <td>{{ changeTypeMapper[item.change_type] }}</td>
+            <td>{{ item.created_on }}</td>
+            <td>
+              <a [routerLink]="['/history', item.id]" class="btn-detail">Détails</a>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</div>

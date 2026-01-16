@@ -1,0 +1,32 @@
+<div class="list-container">
+  <h3>Modèles de messages</h3>
+
+  @if (templates().length === 0) {
+    <p class="empty-state">Aucun modèle de message disponible</p>
+  } @else {
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Sujet</th>
+          <th>Description</th>
+          <th>Type</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (template of templates(); track template.id) {
+          <tr>
+            <td>{{ template.id }}</td>
+            <td>{{ template.subject }}</td>
+            <td>{{ template.description }}</td>
+            <td>{{ template.type }}</td>
+            <td>
+              <a [routerLink]="['/message-templates', template.id]" class="btn-detail">Détails</a>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</div>

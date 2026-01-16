@@ -1,0 +1,34 @@
+<div class="list-container">
+  <h3>Transitions entre stacks</h3>
+
+  @if (transitions().length === 0) {
+    <p class="empty-state">Aucune transition disponible</p>
+  } @else {
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Stack source</th>
+          <th>Stack destination</th>
+          <th>Type</th>
+          <th>Seuil (heures)</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (transition of transitions(); track transition.id) {
+          <tr>
+            <td>{{ transition.id }}</td>
+            <td>{{ transition.source_stack.name }}</td>
+            <td>{{ transition.destination_stack.name }}</td>
+            <td>{{ typeMapper[transition.transition_type] }}</td>
+            <td>{{ transition.auto_transition_threshold_hours || '-' }}</td>
+            <td>
+              <a [routerLink]="['/task-stack-transitions', transition.id]" class="btn-detail">Détails</a>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</div>

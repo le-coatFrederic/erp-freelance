@@ -21,7 +21,8 @@ public class TaskStackMapper {
     public TaskStackEntity toEntity(TaskStackWithoutIdRequest dto) {
         return new TaskStackEntity(
             dto.name(),
-            dto.description()
+            dto.description(),
+            dto.isCompleted()
         );
     }
 
@@ -30,6 +31,7 @@ public class TaskStackMapper {
             entity.getId(),
             entity.getName(),
             entity.getDescription(),
+            entity.getIsCompleted(),
             null
         );
     }
@@ -52,6 +54,7 @@ public class TaskStackMapper {
             entity.getId(),
             entity.getName(),
             entity.getDescription(),
+            entity.getIsCompleted(),
             transitionDtos
         );
     }

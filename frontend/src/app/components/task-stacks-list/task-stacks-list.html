@@ -1,0 +1,32 @@
+<div class="list-container">
+  <h3>Stacks de tâches</h3>
+
+  @if (taskStacks().length === 0) {
+    <p class="empty-state">Aucun stack de tâche disponible</p>
+  } @else {
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nom</th>
+          <th>Description</th>
+          <th>Transitions sortantes</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (stack of taskStacks(); track stack.id) {
+          <tr>
+            <td>{{ stack.id }}</td>
+            <td>{{ stack.name }}</td>
+            <td>{{ stack.description }}</td>
+            <td>{{ stack.outgoing_transitions?.length || 0 }}</td>
+            <td>
+              <a [routerLink]="['/task-stacks', stack.id]" class="btn-detail">Détails</a>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</div>

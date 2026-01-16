@@ -1,14 +1,12 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { Companies } from './pages/companies/companies';
-import { Contacts } from './pages/contacts/contacts';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Companies, Contacts],
+  imports: [RouterOutlet, RouterLink],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
 export class App {
-  protected readonly title = signal('frontend');
+  protected readonly title = signal('ERP Freelance');
 }

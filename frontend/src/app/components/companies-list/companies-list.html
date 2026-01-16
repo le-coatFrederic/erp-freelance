@@ -1,22 +1,30 @@
-<h3>Companies List</h3>
+<div class="list-container">
+  <h3>Companies List</h3>
 
-<table>
-    <thead>
-        <td>Id</td>
-        <td>Name</td>
-        <td>Siret</td>
-        <td>Category</td>
-        <td>Size</td>
-    </thead>
-    <tbody>
+  @if (companies().length === 0) {
+    <p class="empty-state">Aucune société disponible</p>
+  } @else {
+    <table>
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Name</th>
+          <th>Siret</th>
+          <th>Category</th>
+          <th>Size</th>
+        </tr>
+      </thead>
+      <tbody>
         @for (company of companies(); track company.id) {
-            <tr>
-                <td>{{ company.id }}</td>
-                <td>{{ company.name }}</td>
-                <td>{{ company.siret }}</td>
-                <td>{{ company.category }}</td>
-                <td>{{ company.size }}</td>
-            </tr>
+          <tr>
+            <td>{{ company.id }}</td>
+            <td>{{ company.name }}</td>
+            <td>{{ company.siret }}</td>
+            <td>{{ company.category }}</td>
+            <td>{{ company.size }}</td>
+          </tr>
         }
-    </tbody>
-</table>
+      </tbody>
+    </table>
+  }
+</div>
