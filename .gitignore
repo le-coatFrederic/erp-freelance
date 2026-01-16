@@ -27,3 +27,4 @@ replay_pid*
 
 .env
 CLAUDE.md
+docker-compose.yml
